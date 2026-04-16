@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Taller Django</title>
+    <style>
+        :root {
+            --bg-a: #f4efe4;
+            --bg-b: #dcebe2;
+            --card: rgba(255, 255, 255, 0.88);
+            --text: #24312a;
+            --accent-a: #9e463f;
+            --accent-b: #166a52;
+            --border: rgba(36, 49, 42, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Cambria, Georgia, serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(158, 70, 63, 0.18), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(22, 106, 82, 0.18), transparent 30%),
+                linear-gradient(135deg, var(--bg-a), var(--bg-b));
+        }
+
+        .page {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 32px 16px;
+        }
+
+        .panel {
+            width: min(960px, 100%);
+            background: var(--card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 24px 60px rgba(30, 41, 35, 0.14);
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.78rem;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 0.98;
+        }
+
+        .lead {
+            max-width: 60ch;
+            margin: 0 0 28px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            border-radius: 22px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 20px;
+            line-height: 1.55;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .button.asistencia { background: var(--accent-a); }
+        .button.solicitud { background: var(--accent-b); }
+        .button:hover { opacity: 0.92; }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="panel">
+            <p class="eyebrow">Taller 2 Django</p>
+            <h1>Inicio de formularios</h1>
+            <p class="lead">Desde esta página puedes acceder a los dos módulos del proyecto. Vale aloja el formulario de asistencia y David aloja el formulario de solicitud.</p>
+
+            <div class="grid">
+                <article class="card">
+                    <h2>Asistencia</h2>
+                    <p>Registra nombre, documento, correo, fecha, horas de ingreso y salida, presencia y observaciones.</p>
+                    <div class="actions">
+                        <a class="button asistencia" href="{% url 'vale_formulario:asistencia_registro' %}">Ir a asistencia</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h2>Solicitud</h2>
+                    <p>Registra el solicitante, tipo de solicitud, asunto, descripción detallada, fecha y archivo adjunto.</p>
+                    <div class="actions">
+                        <a class="button solicitud" href="{% url 'david_formulario:solicitud_registro' %}">Ir a solicitud</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

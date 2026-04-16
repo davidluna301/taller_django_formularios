@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de solicitud</title>
+    <style>
+        :root {
+            --bg: #eef6f2;
+            --panel: #fbfefc;
+            --text: #1f3028;
+            --accent: #166a52;
+            --accent-dark: #0f503e;
+            --border: #bfd8cc;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Trebuchet MS', Verdana, sans-serif;
+            background: linear-gradient(180deg, #edf7f1 0%, #dbece4 100%);
+            color: var(--text);
+        }
+        .page {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 32px 16px;
+        }
+        .card {
+            width: min(780px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 22px 42px rgba(17, 66, 48, 0.12);
+        }
+        h1 { margin-top: 0; }
+        form p { margin: 0 0 14px; }
+        label { display: block; font-weight: 700; margin-bottom: 6px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font: inherit;
+            background: #fff;
+        }
+        button {
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 22px;
+            font: inherit;
+            cursor: pointer;
+        }
+        button:hover { background: var(--accent-dark); }
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        .link-button {
+            display: inline-block;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            padding: 11px 18px;
+            text-decoration: none;
+            color: var(--text);
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <h1>Formulario de solicitud</h1>
+            <p>Registra una solicitud académica, administrativa, técnica o de otro tipo.</p>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="actions">
+                    <button type="submit">Enviar solicitud</button>
+                    <a class="link-button" href="{% url 'inicio' %}">Volver al inicio</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
