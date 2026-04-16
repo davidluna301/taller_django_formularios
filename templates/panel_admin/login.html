@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso administrador</title>
+    <style>
+        :root {
+            --bg-top: #f4eadb;
+            --bg-bottom: #d4e7de;
+            --panel: rgba(255, 250, 244, 0.92);
+            --text: #223029;
+            --accent: #8e3b32;
+            --accent-dark: #6e2d27;
+            --line: rgba(34, 48, 41, 0.14);
+            --error: #9b2c2c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Cambria, Georgia, serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(142, 59, 50, 0.18), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(22, 106, 82, 0.18), transparent 26%),
+                linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+        }
+
+        .shell {
+            width: min(980px, 100%);
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 28px 60px rgba(41, 48, 44, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .hero {
+            padding: 44px;
+            background: linear-gradient(180deg, rgba(255, 246, 239, 0.8), rgba(245, 251, 248, 0.7));
+        }
+
+        .hero p:first-child {
+            margin: 0 0 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.75rem;
+        }
+
+        .hero h1 {
+            margin: 0 0 16px;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 0.96;
+        }
+
+        .hero p {
+            max-width: 36ch;
+            line-height: 1.6;
+        }
+
+        .panel {
+            padding: 36px;
+            background: var(--panel);
+            backdrop-filter: blur(8px);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.6rem;
+        }
+
+        .panel p {
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        form p {
+            margin: 0 0 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            padding: 13px 14px;
+            font: inherit;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        ul.errorlist {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px;
+            color: var(--error);
+            font-size: 0.95rem;
+        }
+
+        button {
+            width: 100%;
+            border: 0;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            padding: 14px 18px;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--accent-dark);
+        }
+
+        .note {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--line);
+            font-size: 0.95rem;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 18px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        @media (max-width: 860px) {
+            .shell {
+                grid-template-columns: 1fr;
+            }
+
+            .hero,
+            .panel {
+                padding: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <p>Panel interno</p>
+            <h1>Administrador de formularios</h1>
+            <p>Accede con un usuario de personal para revisar los registros de asistencia y solicitud guardados en la base de datos, además de descargar reportes y archivos adjuntos.</p>
+        </section>
+
+        <section class="panel">
+            <h2>Iniciar sesión</h2>
+            <p>Usa las credenciales configuradas para el administrador del proyecto.</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Entrar al panel</button>
+            </form>
+            <div class="note">
+                Usuario esperado: <strong>admin</strong><br>
+                Contraseña esperada: <strong>12345</strong>
+            </div>
+            <a class="back" href="{% url 'inicio' %}">Volver al inicio</a>
+        </section>
+    </main>
+</body>
+</html>
